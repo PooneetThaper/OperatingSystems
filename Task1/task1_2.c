@@ -3,33 +3,39 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main(int argc, char* argv[]){
   char* source_filepath = argv[1];
   char* destination_filepath = argv[2];
+  int returnval;
 
   // Check read access and existance of source file
-  int returnval = access(source_filepath, R_OK);
+  returnval = access(source_filepath, R_OK);
   if (returnval != 0){
     // There was an issue, writing error and returning 1
     char message[100];
-    strcpy(message, filepath);
+    strcpy(message, source_filepath);
     perror(message);
     return 1;
   }
 
-  // Check write access and existance of source file
-  int returnval = access(destination_filepath, W_OK);
+  // Check write access and existance of destination file
+  returnval = access(destination_filepath, W_OK);
   if (returnval != 0){
-    // There was an issue, writing error and returning 1
-    char message[100];
-    strcpy(message, filepath);
-    perror(message);
-    return 1;
+    if (errno == EACCES) {
+      // There was an issue, writing error and returning 1
+      char message[100];
+      strcpy(message, destination_filepath);
+      perror(message);
+      return 1;
+    }
   }
 
   // Open the source file for reading only using the open system call
   int source_file = open(source_filepath, O_RDONLY);
+
+  //NOTE: The approach taken in this program is to read the whole source file into a dynamic buffer then write the buffer to the destination file in one shot. This may not be the best idea for larger files.
 
   // Allocate a char array of reasonable size as a buffer for reading in one character at a time
   int capacity = 20;
