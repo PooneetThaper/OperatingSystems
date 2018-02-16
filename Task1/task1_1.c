@@ -1,34 +1,40 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <errno.h>
+#include <string.h>
 
 int main(int argc, char* argv[]){
   char* filepath = argv[1];
-  int returnval;
 
   // Check read access and existance of file
-  returnval = access(filepath, R_OK);
+  int returnval = access(filepath, R_OK);
   if (returnval != 0){
-    if (errno == EACCES) {
-      printf ("%s is not accessible\n", filepath);
-    } else if (errno == ENOENT) {
-      printf ("%s does not exist\n", filepath);
-      return 0;
-    }
+    // There was an issue, writing error and returning 1
+    char message[100];
+    strcpy(message, filepath);
+    perror(message);
+    return 1;
   }
 
-  // Read into a char buffer and append to vector
+  // Open the file for reading only using the open system call
   int file = open(filepath, O_RDONLY);
+
+  // Allocate a char array as a buffer for reading in one character at a time
   char buffer[1];
 
   printf("\n");
+
+  // Read character by character while able to do so using the read system command
   while(read(file, buffer, 1)) {
+    // Read 1 byte (one character) from file to buffer
     printf("%c", buffer[0]);
+    // Print character to terminal
   }
+
   printf("\n");
+
+  close(file);
 
   return 0;
 }

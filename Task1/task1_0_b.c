@@ -12,7 +12,11 @@ int main(int argc, char* argv[]){
   if (retval == 0) {
     printf ("\n created and opened %s just fine", filepath);
   } else {
-    printf ("\n got error no %d and retval %d\n", errno, retval);
+    // There was an issue, writing error and returning 1
+    char message[100];
+    strcpy(message, filepath);
+    perror(message);
+    return 1;
   }
 
   return 0;
