@@ -37,32 +37,38 @@ int main(int argc, char* argv[]){
   int destination_file = open(destination_filepath, O_WRONLY | O_CREAT, 0666);
 
   // Allocate a char array of size 100 as a buffer for reading in 100 characters at a time
-  char (*buffer)[100];
+  char* buffer= malloc(103);
   int size = 100;
+  buffer[100] = 'X';
+  buffer[101] = 'Y';
+  buffer[102] = 'Z';
 
   // Read in 100 bytes while able to do so using the read system command
-  while (size == 100) {
-    size = 0;
+  while (size >= 100) {
+    size = read(source_file, &buffer[0], 100);
 
-    while (read(source_file, &buffer[size], 1)) {
-      if ((*buffer)[size] == '1'){
-        (*buffer)[size] = 'A';
+    for (int i = 0; i< size ; i++) {
+      if (buffer[i] == '1'){
+        buffer[i] = 'A';
       }
-      size++;
     }
 
     // Write buffer into destination file using write system call
-    write(destination_file, buffer, size);
-
-    // Write 'XYZ' to file
-    write(destination_file, 'XYZ', 3);
+    if (size == 100){
+      write(destination_file, buffer, 103);
+    } else {
+      write(destination_file, buffer, size);
+    }
 
   }
+
+  write(destination_file, "\n", 1);
 
   // Close source and destination files
   close(source_file);
   close(destination_file);
 
   free(buffer);
+
   return 0;
 }
