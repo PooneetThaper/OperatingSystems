@@ -1,0 +1,19 @@
+I implemented part 2 of task 2 in a file named task2_2.c. When run, it produced the following output:
+
+P pid: 5981
+a: 10, b: 30, pid: 5981
+Q pid: 5982
+a: 35, b: 25, pid: 5982
+a: 35, b: 45, pid: 5982
+R pid: 5983
+a: 905, b: 25, pid: 5983
+
+I printed out the current pid's of processes P, Q, and R to make interpretation easier. I have also made comments in the source file to clarify where each line of the outputs is coming from. The result above was consistent throughout multiple runs (except for the pid values).
+
+Interpretation:
+
+The program (process P) declares the values of a = 10 and b = 25. Next, process P is forked to create process Q. At the time of forking, the values of a and b are copied over to the memory of child process Q. Process Q will start with these values of a and b. Process P moves on to the else block in the if(fq==0){...} else{...} conditional where it assigns a value of b = b+a-5 (30) and prints the current values onto the second line of the output.
+
+Process Q then modifies its copy of the data by assigning a = a+b (35) and printing the current value of its copies onto the fourth line of the output. Process Q is forked and the modified values from process Q are copied into child process R. Process Q moves on to execute the if block in the if(fr!=0){...} else{...} conditional. Here it further modifies its current values (a=35, b=25) by assigning b = b+20 (45) and printing this to the fifth line of the output.
+
+Program R starts with the values a=35 and b=25. It does the assignment a=(a*b)+30 (905) to its own copy of the data and prints the result to the seventh line of the output.
