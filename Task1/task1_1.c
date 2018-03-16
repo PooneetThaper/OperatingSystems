@@ -1,3 +1,8 @@
+/* Task 1 Part 1
+Complilation: gcc task1_1.c -o displaycontent
+Usage: ./displaycontent [source_filepath]
+*/
+
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>

@@ -1,3 +1,8 @@
+/* Task 1 Part 2
+Complilation: gcc task1_2.c -o cp_copy
+Usage: ./cp_copy [source_filepath] [destination_filepath]
+*/
+
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -51,7 +56,7 @@ int main(int argc, char* argv[]){
       char* new_buffer = realloc(buffer, capacity*2);
       if(!new_buffer){
         // If reallocating the buffer fails, terminate program
-        printf(stderr, "Issue reallocating buffer");
+        perror("Issue reallocating buffer");
         return 1;
       }
       buffer = new_buffer;

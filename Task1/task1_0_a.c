@@ -1,3 +1,8 @@
+/* Task 1 Part 0a
+Complilation: gcc task1_0_a.c -o check_access
+Usage: ./check_access [source_filepath]
+*/
+
 #include <stdio.h>
 #include <unistd.h>
 #include <errno.h>

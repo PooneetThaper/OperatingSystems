@@ -1,3 +1,8 @@
+/* Task 1 Part 3
+Complilation: gcc task1_3.c -o cp_augmented
+Usage: ./cp_augmented [source_filepath] [destination_filepath]
+*/
+
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
