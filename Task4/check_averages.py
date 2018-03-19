@@ -5,7 +5,7 @@ vals = []
 with open("scores.csv","r") as csvfile:
     reader = csv.reader(csvfile, delimiter=' ')
     for row in reader:
-        vals.append([int(entry) for entry in row[0].split(',')[:-1]])
+        vals.append([float(entry) for entry in row[0].split(',')[:-1]])
 
 vals = [x for x in zip(*vals)]
 averages = [sum(vals[i])/len(vals) for i in range(len(vals[0]))]
