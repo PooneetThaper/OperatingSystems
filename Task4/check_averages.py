@@ -1,5 +1,4 @@
 import csv
-import numpy as np
 
 vals = []
 
@@ -8,8 +7,8 @@ with open("scores.csv","r") as csvfile:
     for row in reader:
         vals.append([int(entry) for entry in row[0].split(',')[:-1]])
 
-vals = np.array(vals)
-averages = [sum(vals[:,i])/len(vals) for i in range(len(vals[0]))]
+vals = [x for x in zip(*vals)]
+averages = [sum(vals[i])/len(vals) for i in range(len(vals[0]))]
 for i in range(len(averages)):
     print("Assignement {} Average: {}".format(i, averages[i]))
 
