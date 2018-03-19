@@ -1,7 +1,7 @@
 all: generate_scores calculate_averages
 
-generate_scores: random_data.c
-	gcc random_data.c -o generate_scores
+generate_scores: generate_scores.c
+	gcc generate_scores.c -o generate_scores
 
 calculate_averages: calculate_averages.c
 	gcc calculate_averages.c -o calculate_averages

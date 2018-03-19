@@ -15,7 +15,6 @@ int main(int argc, char* argv[]){
   // Each score is written using two characters for easy seeking
   int input_file = open("scores.csv", O_RDONLY);
   char input_from_file[2];
-
   int file_length = lseek(input_file, 0, SEEK_END);
   off_t offset_to_start = lseek(input_file, 0, SEEK_SET);
   lseek(input_file, offset_to_start, SEEK_SET);
@@ -23,10 +22,10 @@ int main(int argc, char* argv[]){
   // Output file and variables to prepare output
   // The char[] and output length are left empty to be filled by worker
   int output_file = open("averages.txt", O_WRONLY|O_CREAT|O_TRUNC, 0666);
-  char output_to_file[40];
-  int output_length = 0;
+  char output_to_file[40]; // Output buffer for results
+  int output_length = 0; // Length of content of output buffer for write
 
-  // Variables to
+  // Variables for the children
   int curr_chapter = 0; // Chapter of manager/worker
   int curr_homework = 0; // Homework number for worker
   int curr_count = 0; // Count of number of scores averaged (for running average)

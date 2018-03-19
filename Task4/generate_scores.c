@@ -15,7 +15,7 @@ int main(int argc, char* argv[]){
   int arg1 = (argc == 5) ? atoi(argv[1]) : 10; // num_students
   int arg2 = (argc == 5) ? atoi(argv[2]) : 5; // num_chapters
   int arg3 = (argc == 5) ? atoi(argv[3]) : 2; // num_homeworks_per_chapter
-  int arg4 = (argc == 5) ? atoi(argv[4]) : 100; // max_score
+  int arg4 = (argc == 5) ? atoi(argv[4]) : 20; // max_score
 
   char* data_file_path = "scores.csv";
 
