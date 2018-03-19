@@ -17,3 +17,5 @@ clean:
 	rm Parent
 	rm P1
 	rm P2
+	rm destination1.txt
+	rm destination2.txt
