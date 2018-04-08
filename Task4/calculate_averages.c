@@ -36,13 +36,13 @@ int main(int argc, char* argv[]){
 
   for(int i = 0; i < num_chapters; i++){
     // Fork a manager for each chapter
-    if (fork()) {
+    if (!fork()) {
       curr_chapter = i;
-      printf("-- Manager Chapter %d starting assignment of work\n", curr_chapter);
+      printf("-- Manager Chapter %d starting assignment of work\n", curr_chapter+1);
 
       for(int j = 0; j < num_hw_per_chapter; j++){
         // Fork a worker for each homework in the chapter
-        if (fork()) {
+        if (!fork()) {
 
           // Assign variables needed for the function of the worker
           curr_homework = j;
@@ -77,7 +77,7 @@ int main(int argc, char* argv[]){
         }
       }
 
-      printf("-- Manager Chapter %d finished assigning work\n", curr_chapter);
+      printf("-- Manager Chapter %d finished assigning work\n", curr_chapter+1);
 
       return 0;
     }
