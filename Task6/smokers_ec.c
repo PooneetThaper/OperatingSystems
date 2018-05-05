@@ -14,6 +14,8 @@
 #define PAPER 1
 #define MATCH 2
 
+#define SIGCONT 18
+
 int *buffer;
 int nextp=0;
 int mutex,full,empty,queue;    /* semaphore variables
